@@ -6,7 +6,7 @@ CREATE TABLE garages (
     garage_city VARCHAR(64),
     garage_creation DATETIME,
     garage_turnover INT
-)
+);
 
 CREATE TABLE cars (
     id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
@@ -15,7 +15,7 @@ CREATE TABLE cars (
     car_price INT,
     car_garage_id INT,
     FOREIGN KEY (car_garage_id) REFERENCES garages(id)
-)
+);
 
 INSERT INTO `garages` (garage_name, garage_city, garage_creation, garage_turnover)
 VALUES ('garage_L1', 'Briançon', '2001-04-21 19:00:00', 100000),
@@ -77,7 +77,7 @@ VALUES ('eugeot', 'red', 10000, 1),
 ('toyota', 'white', 90000, 9),
 ('honda', 'orange', 220000, 10),
 ('honda', 'grey', 220000, 10),
-('honda', 'green', 220000, 10),
+('honda', 'white', 220000, 10),
 ('honda', 'blue', 220000, 10),
 ('honda', 'black', 220000, 10)
 
@@ -90,7 +90,7 @@ SELECT * FROM cars ORDER BY car_price DESC;
 
 SELECT garage_name, COUNT(car_model) FROM cars JOIN garages ON cars.car_garage_id = garages.id GROUP BY garage_name;
 
-SELECT garage_name, SUM(car_price) FROM cars JOIN garages ON cars.car_garage_id = garages.id GROUP BY garage_name ORDER BY SUM(car_price) DESC;
+SELECT garage_name, SUM(car_price) FROM cars JOIN garages ON cars.car_garage_id = garages.id GROUP BY garage_name ORDER BY SUM(car_price) DESC LIMIT 1;
 
 DELETE FROM cars WHERE car_model LIKE 'E%';
 
